@@ -1,0 +1,3 @@
+usr/local/bin/miraclecoind usr/bin
+usr/local/bin/miraclecoin-cli usr/bin
+debian/examples/miraclecoin.conf etc/miraclecoin

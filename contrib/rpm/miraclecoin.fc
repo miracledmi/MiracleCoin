@@ -1,0 +1,8 @@
+/usr/bin/miraclecoin-cli		--	gen_context(system_u:object_r:miraclecoin_exec_t,s0)
+/usr/sbin/miraclecoind		--	gen_context(system_u:object_r:miraclecoin_exec_t,s0)
+/usr/lib(64)?/miraclecoin/miraclecoind		--	gen_context(system_u:object_r:miraclecoin_exec_t,s0)
+
+/etc/miraclecoin(/.*)?		gen_context(system_u:object_r:miraclecoin_conf_t,s0)
+/var/lib/miraclecoin(/.*)?		gen_context(system_u:object_r:miraclecoin_var_lib_t,s0)
+
+(/var)?/run/miraclecoind(/.*)?   gen_context(system_u:object_r:miraclecoin_var_run_t,s0)

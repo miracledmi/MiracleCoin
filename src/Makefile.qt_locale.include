@@ -1,0 +1,15 @@
+QT_TS = \
+  qt/locale/miraclecoin_de.ts \
+  qt/locale/miraclecoin_en.ts \
+  qt/locale/miraclecoin_en_US.ts \
+  qt/locale/miraclecoin_es.ts \
+  qt/locale/miraclecoin_es_ES.ts \
+  qt/locale/miraclecoin_fr_FR.ts \
+  qt/locale/miraclecoin_hr_HR.ts \
+  qt/locale/miraclecoin_it.ts \
+  qt/locale/miraclecoin_ko_KR.ts \
+  qt/locale/miraclecoin_nl.ts \
+  qt/locale/miraclecoin_pl.ts \
+  qt/locale/miraclecoin_ru.ts \
+  qt/locale/miraclecoin_tr.ts \
+  qt/locale/miraclecoin_zh_CN.ts

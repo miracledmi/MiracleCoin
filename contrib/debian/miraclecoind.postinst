@@ -1,0 +1,28 @@
+
+#!/bin/sh
+
+# setup miraclecoin account, homedir etc
+
+set -e
+
+MRCUSER="miraclecoin"
+MRCHOME="/var/lib/miraclecoin"
+
+if [ "$1" = "configure" ]; then
+	# Add miraclecoin user/group - this will gracefully abort if the user already exists.
+	# A homedir is never created.
+	set +e
+	adduser --system --home "${MRCHOME}" --no-create-home --group "${MRCUSER}" 2>/dev/null
+	set -e
+
+	# If the homedir does not already exist, create it with proper
+	# ownership and permissions.
+	if [ ! -d "${MRCHOME}" ]; then
+		mkdir -m 0750 -p "${MRCHOME}"
+		chown "${MRCUSER}:${MRCUSER}" "${MRCHOME}"
+	fi
+fi
+
+#DEBHELPER#
+
+exit 0

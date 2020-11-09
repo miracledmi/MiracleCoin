@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=MiracleCoin
+Comment=MiracleCoin QT main network
+GenericName=MiracleCoin Digital Currency QT client main network
+Exec=miraclecoin-core.qt %u
+Terminal=false
+Type=Application
+Icon=${SNAP}/share/pixmaps/miraclecoin.png
+MimeType=x-scheme-handler/miraclecoin;
+Categories=X-Office;X-Finance;
+Keywords=internet;miraclecoin;zmrc;mrc;core;wallet;qt;main;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0

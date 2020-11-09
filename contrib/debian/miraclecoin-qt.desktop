@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=MiracleCoin
+Comment=MiracleCoin P2P Cryptocurrency
+Comment[fr]=MiracleCoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=MiracleCoin, eşten eşe kriptografik sanal para birimi
+Exec=miraclecoin-qt %u
+Terminal=false
+Type=Application
+Icon=miraclecoin128
+MimeType=x-scheme-handler/miraclecoin;
+Categories=Office;Finance;
+StartupWMClass=MiracleCoin-qt

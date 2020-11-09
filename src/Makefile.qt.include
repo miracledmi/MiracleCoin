@@ -1,0 +1,710 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/miraclecoin-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# miraclecoin qt core #
+include Makefile.qt_locale.include
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/miraclecoin/forms/loadingdialog.ui \
+  qt/miraclecoin/forms/snackbar.ui \
+  qt/miraclecoin/forms/navmenuwidget.ui \
+  qt/miraclecoin/forms/lockunlock.ui \
+  qt/miraclecoin/forms/expandablebutton.ui \
+  qt/miraclecoin/forms/receivedialog.ui \
+  qt/miraclecoin/forms/topbar.ui \
+  qt/miraclecoin/forms/txrow.ui \
+  qt/miraclecoin/forms/dashboardwidget.ui \
+  qt/miraclecoin/forms/addresslabelrow.ui \
+  qt/miraclecoin/forms/contactdropdownrow.ui \
+  qt/miraclecoin/forms/mninfodialog.ui \
+  qt/miraclecoin/forms/optionbutton.ui \
+  qt/miraclecoin/forms/masternodewizarddialog.ui \
+  qt/miraclecoin/forms/mnrow.ui \
+  qt/miraclecoin/forms/masternodeswidget.ui \
+  qt/miraclecoin/forms/myaddressrow.ui \
+  qt/miraclecoin/forms/csrow.ui \
+  qt/miraclecoin/forms/sendchangeaddressdialog.ui \
+  qt/miraclecoin/forms/sendconfirmdialog.ui \
+  qt/miraclecoin/forms/sendcustomfeedialog.ui \
+  qt/miraclecoin/forms/sendchangeaddressdialog.ui \
+  qt/miraclecoin/forms/sendmultirow.ui \
+  qt/miraclecoin/forms/send.ui \
+  qt/miraclecoin/forms/addnewaddressdialog.ui \
+  qt/miraclecoin/forms/addnewcontactdialog.ui \
+  qt/miraclecoin/forms/requestdialog.ui \
+  qt/miraclecoin/forms/receivewidget.ui \
+  qt/miraclecoin/forms/tooltipmenu.ui \
+  qt/miraclecoin/forms/addresseswidget.ui \
+  qt/miraclecoin/forms/defaultdialog.ui \
+  qt/miraclecoin/forms/coldstakingwidget.ui \
+  qt/miraclecoin/settings/forms/settingsbackupwallet.ui \
+  qt/miraclecoin/settings/forms/settingsexportcsv.ui \
+  qt/miraclecoin/settings/forms/settingsbittoolwidget.ui \
+  qt/miraclecoin/settings/forms/settingsconsolewidget.ui \
+  qt/miraclecoin/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/miraclecoin/settings/forms/settingsfaqwidget.ui \
+  qt/miraclecoin/settings/forms/settingsinformationwidget.ui \
+  qt/miraclecoin/settings/forms/settingsmainoptionswidget.ui \
+  qt/miraclecoin/settings/forms/settingsmultisenddialog.ui \
+  qt/miraclecoin/settings/forms/settingsmultisendwidget.ui \
+  qt/miraclecoin/settings/forms/settingssignmessagewidgets.ui \
+  qt/miraclecoin/settings/forms/settingswalletoptionswidget.ui \
+  qt/miraclecoin/settings/forms/settingswalletrepairwidget.ui \
+  qt/miraclecoin/settings/forms/settingswidget.ui \
+  qt/miraclecoin/forms/welcomecontentwidget.ui \
+  qt/miraclecoin/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/miraclecoin/moc_miraclecoingui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/miraclecoin/moc_loadingdialog.cpp \
+  qt/miraclecoin/moc_pwidget.cpp \
+  qt/miraclecoin/moc_focuseddialog.cpp \
+  qt/miraclecoin/moc_snackbar.cpp \
+  qt/miraclecoin/moc_navmenuwidget.cpp \
+  qt/miraclecoin/moc_lockunlock.cpp \
+  qt/miraclecoin/moc_expandablebutton.cpp \
+  qt/miraclecoin/moc_furabstractlistitemdelegate.cpp \
+  qt/miraclecoin/moc_receivedialog.cpp \
+  qt/miraclecoin/moc_pfborderimage.cpp \
+  qt/miraclecoin/moc_topbar.cpp \
+  qt/miraclecoin/moc_txrow.cpp \
+  qt/miraclecoin/moc_dashboardwidget.cpp \
+  qt/miraclecoin/moc_addresslabelrow.cpp \
+  qt/miraclecoin/moc_contactdropdownrow.cpp \
+  qt/miraclecoin/moc_mninfodialog.cpp \
+  qt/miraclecoin/moc_optionbutton.cpp \
+  qt/miraclecoin/moc_coldstakingmodel.cpp \
+  qt/miraclecoin/moc_mnmodel.cpp \
+  qt/miraclecoin/moc_masternodewizarddialog.cpp \
+  qt/miraclecoin/moc_mnrow.cpp \
+  qt/miraclecoin/moc_masternodeswidget.cpp \
+  qt/miraclecoin/moc_myaddressrow.cpp \
+  qt/miraclecoin/moc_csrow.cpp \
+  qt/miraclecoin/moc_contactsdropdown.cpp \
+  qt/miraclecoin/moc_sendchangeaddressdialog.cpp \
+  qt/miraclecoin/moc_sendconfirmdialog.cpp \
+  qt/miraclecoin/moc_sendcustomfeedialog.cpp \
+  qt/miraclecoin/moc_sendchangeaddressdialog.cpp \
+  qt/miraclecoin/moc_sendmultirow.cpp \
+  qt/miraclecoin/moc_send.cpp \
+  qt/miraclecoin/moc_addnewaddressdialog.cpp \
+  qt/miraclecoin/moc_addnewcontactdialog.cpp \
+  qt/miraclecoin/moc_requestdialog.cpp \
+  qt/miraclecoin/moc_receivewidget.cpp \
+  qt/miraclecoin/moc_tooltipmenu.cpp \
+  qt/miraclecoin/moc_addresseswidget.cpp \
+  qt/miraclecoin/moc_defaultdialog.cpp \
+  qt/miraclecoin/moc_coldstakingwidget.cpp \
+  qt/miraclecoin/settings/moc_settingsbackupwallet.cpp \
+  qt/miraclecoin/settings/moc_settingsexportcsv.cpp \
+  qt/miraclecoin/settings/moc_settingsbittoolwidget.cpp \
+  qt/miraclecoin/settings/moc_settingsconsolewidget.cpp \
+  qt/miraclecoin/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/miraclecoin/settings/moc_settingsfaqwidget.cpp \
+  qt/miraclecoin/settings/moc_settingsinformationwidget.cpp \
+  qt/miraclecoin/settings/moc_settingsmainoptionswidget.cpp \
+  qt/miraclecoin/settings/moc_settingsmultisenddialog.cpp \
+  qt/miraclecoin/settings/moc_settingsmultisendwidget.cpp \
+  qt/miraclecoin/settings/moc_settingssignmessagewidgets.cpp \
+  qt/miraclecoin/settings/moc_settingswalletoptionswidget.cpp \
+  qt/miraclecoin/settings/moc_settingswalletrepairwidget.cpp \
+  qt/miraclecoin/settings/moc_settingswidget.cpp \
+  qt/miraclecoin/moc_welcomecontentwidget.cpp \
+  qt/miraclecoin/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/miraclecoin.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/miraclecoin/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_miraclecoin.cpp
+QT_QRC = qt/miraclecoin.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_miraclecoin_locale.cpp
+QT_QRC_LOCALE = qt/miraclecoin_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/miraclecoin/miraclecoingui.h \
+  qt/bitcoinunits.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/trafficgraphwidget.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/miraclecoin/prunnable.h \
+  qt/miraclecoin/pfborderimage.h \
+  qt/miraclecoin/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/miraclecoin/pwidget.h \
+  qt/miraclecoin/focuseddialog.h \
+  qt/miraclecoin/guitransactionsutils.h \
+  qt/miraclecoin/snackbar.h \
+  qt/miraclecoin/navmenuwidget.h \
+  qt/miraclecoin/lockunlock.h \
+  qt/miraclecoin/receivedialog.h \
+  qt/miraclecoin/furlistrow.h \
+  qt/miraclecoin/furabstractlistitemdelegate.h \
+  qt/miraclecoin/txviewholder.h \
+  qt/miraclecoin/qtutils.h \
+  qt/miraclecoin/expandablebutton.h \
+  qt/miraclecoin/topbar.h \
+  qt/miraclecoin/txrow.h \
+  qt/miraclecoin/addressholder.h \
+  qt/miraclecoin/addressfilterproxymodel.h \
+  qt/miraclecoin/dashboardwidget.h \
+  qt/miraclecoin/addresslabelrow.h \
+  qt/miraclecoin/contactdropdownrow.h \
+  qt/miraclecoin/mninfodialog.h \
+  qt/miraclecoin/optionbutton.h \
+  qt/miraclecoin/coldstakingmodel.h \
+  qt/miraclecoin/mnmodel.h \
+  qt/miraclecoin/masternodewizarddialog.h \
+  qt/miraclecoin/mnrow.h \
+  qt/miraclecoin/masternodeswidget.h \
+  qt/miraclecoin/myaddressrow.h \
+  qt/miraclecoin/csrow.h \
+  qt/miraclecoin/contactsdropdown.h \
+  qt/miraclecoin/sendchangeaddressdialog.h \
+  qt/miraclecoin/sendconfirmdialog.h \
+  qt/miraclecoin/sendcustomfeedialog.h \
+  qt/miraclecoin/sendchangeaddressdialog.h \
+  qt/miraclecoin/sendmultirow.h \
+  qt/miraclecoin/send.h \
+  qt/miraclecoin/addnewaddressdialog.h \
+  qt/miraclecoin/addnewcontactdialog.h \
+  qt/miraclecoin/requestdialog.h \
+  qt/miraclecoin/receivewidget.h \
+  qt/miraclecoin/tooltipmenu.h \
+  qt/miraclecoin/addresseswidget.h \
+  qt/miraclecoin/defaultdialog.h \
+  qt/miraclecoin/coldstakingwidget.h \
+  qt/miraclecoin/settings/settingsbackupwallet.h \
+  qt/miraclecoin/settings/settingsexportcsv.h \
+  qt/miraclecoin/settings/settingsbittoolwidget.h \
+  qt/miraclecoin/settings/settingsconsolewidget.h \
+  qt/miraclecoin/settings/settingsdisplayoptionswidget.h \
+  qt/miraclecoin/settings/settingsfaqwidget.h \
+  qt/miraclecoin/settings/settingsinformationwidget.h \
+  qt/miraclecoin/settings/settingsmainoptionswidget.h \
+  qt/miraclecoin/settings/settingsmultisenddialog.h \
+  qt/miraclecoin/settings/settingsmultisendwidget.h \
+  qt/miraclecoin/settings/settingssignmessagewidgets.h \
+  qt/miraclecoin/settings/settingswalletoptionswidget.h \
+  qt/miraclecoin/settings/settingswalletrepairwidget.h \
+  qt/miraclecoin/settings/settingswidget.h \
+  qt/miraclecoin/welcomecontentwidget.h \
+  qt/miraclecoin/splash.h
+
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/ic-transaction-received.png \
+  qt/res/icons/ic-transaction-mint.png \
+  qt/res/icons/ic-transaction-sent.png \
+  qt/res/icons/ic-transaction-staked.png \
+  qt/miraclecoin/res/img/bg-dashboard-banner.png \
+  qt/miraclecoin/res/img/bg-multi-number-dark.png \
+  qt/miraclecoin/res/img/ic-check-locked.png \
+  qt/miraclecoin/res/img/ic-nav-address.png \
+  qt/miraclecoin/res/img/ic-update.png \
+  qt/miraclecoin/res/img/bg-multi-number.png \
+  qt/miraclecoin/res/img/ic-check-mint-off.png \
+  qt/miraclecoin/res/img/ic-nav-cold-staking.png \
+  qt/miraclecoin/res/img/ic-nav-cold-staking-active.png \
+  qt/miraclecoin/res/img/ic-nav-dashboard-active.png \
+  qt/miraclecoin/res/img/ic-wallet-status-locked.png \
+  qt/miraclecoin/res/img/bg-splash.png \
+  qt/miraclecoin/res/img/ic-check-mint.png \
+  qt/miraclecoin/res/img/ic-nav-dashboard-hover.png \
+  qt/miraclecoin/res/img/ic-wallet-status-staking.png \
+  qt/miraclecoin/res/img/ic-check-peers-off.png \
+  qt/miraclecoin/res/img/ic-nav-dashboard.png \
+  qt/miraclecoin/res/img/ic-wallet-status-unlocked.png \
+  qt/miraclecoin/res/img/ic-check-peers.png \
+  qt/miraclecoin/res/img/ic-nav-master-active.png \
+  qt/miraclecoin/res/img/ic-watch-password-white.png \
+  qt/miraclecoin/res/img/bg-welcome-container.jpg \
+  qt/miraclecoin/res/img/bg-welcome-container.png \
+  qt/miraclecoin/res/img/bg-welcome-container@2x.png \
+  qt/miraclecoin/res/img/bg-welcome-container@3x.png \
+  qt/miraclecoin/res/img/ic-check-staking-off.png \
+  qt/miraclecoin/res/img/ic-nav-master-hover.png \
+  qt/miraclecoin/res/img/ic-watch-password.png \
+  qt/miraclecoin/res/img/bg-welcome.jpg \
+  qt/miraclecoin/res/img/bg-welcome.png \
+  qt/miraclecoin/res/img/ic-check-staking.png \
+  qt/miraclecoin/res/img/ic-nav-master.png \
+  qt/miraclecoin/res/img/img-dashboard-banner.jpg \
+  qt/miraclecoin/res/img/btn-radio-active.png \
+  qt/miraclecoin/res/img/ic-check-sync-off.png \
+  qt/miraclecoin/res/img/ic-nav-privacy-active.png \
+  qt/miraclecoin/res/img/img-empty-contacts.png \
+  qt/miraclecoin/res/img/btn-radio-off.png \
+  qt/miraclecoin/res/img/ic-nav-privacy-hover.png \
+  qt/miraclecoin/res/img/img-empty-dark-contacts.png \
+  qt/miraclecoin/res/img/ic-contact-arrow-down.png \
+  qt/miraclecoin/res/img/ic-contact-arrow-down-white.png \
+  qt/miraclecoin/res/img/ic-check-sync.png \
+  qt/miraclecoin/res/img/ic-check-faq.png \
+  qt/miraclecoin/res/img/ic-nav-privacy.png \
+  qt/miraclecoin/res/img/img-empty-dark-error.png \
+  qt/miraclecoin/res/img/ic-add-label.png \
+  qt/miraclecoin/res/img/ic-pending.png \
+  qt/miraclecoin/res/img/ic-check-theme-dark.png \
+  qt/miraclecoin/res/img/ic-nav-receive-active.png \
+  qt/miraclecoin/res/img/img-empty-dark-masternode.png \
+  qt/miraclecoin/res/img/ic-add-liliac.png \
+  qt/miraclecoin/res/img/ic-check-theme-light.png \
+  qt/miraclecoin/res/img/ic-nav-receive-hover.png \
+  qt/miraclecoin/res/img/img-empty-dark-multisend.png \
+  qt/miraclecoin/res/img/ic-add-purple.png \
+  qt/miraclecoin/res/img/ic-check-white.png \
+  qt/miraclecoin/res/img/ic-nav-receive.png \
+  qt/miraclecoin/res/img/img-empty-dark-peers.png \
+  qt/miraclecoin/res/img/ic-add.png \
+  qt/miraclecoin/res/img/ic-check.png \
+  qt/miraclecoin/res/img/ic-nav-send-active.png \
+  qt/miraclecoin/res/img/img-empty-dark-staking-off.png \
+  qt/miraclecoin/res/img/img-empty-dark-staking-on.png \
+  qt/miraclecoin/res/img/ic-address-book-grey.png \
+  qt/miraclecoin/res/img/ic-chevron-left.png \
+  qt/miraclecoin/res/img/ic-nav-send-hover.png \
+  qt/miraclecoin/res/img/img-empty-dark-transactions.png \
+  qt/miraclecoin/res/img/ic-address-book-white.png \
+  qt/miraclecoin/res/img/ic-chevron-right.png \
+  qt/miraclecoin/res/img/ic-nav-send.png \
+  qt/miraclecoin/res/img/img-empty-error.png \
+  qt/miraclecoin/res/img/ic-address-book.png \
+  qt/miraclecoin/res/img/ic-clear-liliac.png \
+  qt/miraclecoin/res/img/ic-nav-settings-active.png \
+  qt/miraclecoin/res/img/img-empty-masternode.png \
+  qt/miraclecoin/res/img/ic-address-send-white.png \
+  qt/miraclecoin/res/img/ic-clear-purple.png \
+  qt/miraclecoin/res/img/ic-nav-settings-hover.png \
+  qt/miraclecoin/res/img/img-empty-multisend.png \
+  qt/miraclecoin/res/img/ic-address-send.png \
+  qt/miraclecoin/res/img/ic-close-white.png \
+  qt/miraclecoin/res/img/ic-nav-settings.png \
+  qt/miraclecoin/res/img/img-empty-peers.png \
+  qt/miraclecoin/res/img/img-empty-privacy.png \
+  qt/miraclecoin/res/img/img-empty-privacy-dark.png \
+  qt/miraclecoin/res/img/ic-arrow-drop-down-white.png \
+  qt/miraclecoin/res/img/ic-close.png \
+  qt/miraclecoin/res/img/ic-radio-liliac-on.png \
+  qt/miraclecoin/res/img/img-empty-staking-off.png \
+  qt/miraclecoin/res/img/ic-arrow-drop-down.png \
+  qt/miraclecoin/res/img/ic-coin-mrc.png \
+  qt/miraclecoin/res/img/ic-receive-off.png \
+  qt/miraclecoin/res/img/img-empty-staking-on.png \
+  qt/miraclecoin/res/img/ic-arrow-drop-up-white.png \
+  qt/miraclecoin/res/img/ic-receive-on.png \
+  qt/miraclecoin/res/img/img-empty-transactions.png \
+  qt/miraclecoin/res/img/ic-arrow-drop-up.png \
+  qt/miraclecoin/res/img/ic-received.png \
+  qt/miraclecoin/res/img/img-logo-miraclecoin.png \
+  qt/miraclecoin/res/img/ic-arrow-drop-white-down.png \
+  qt/miraclecoin/res/img/ic-combo-box.png \
+  qt/miraclecoin/res/img/ic-send.png \
+  qt/miraclecoin/res/img/img-logo-miraclecoin@2x.png \
+  qt/miraclecoin/res/img/ic-arrow-purple-down.png \
+  qt/miraclecoin/res/img/ic-connect.png \
+  qt/miraclecoin/res/img/ic-submenu-lock.png \
+  qt/miraclecoin/res/img/img-logo-miraclecoin@3x.png \
+  qt/miraclecoin/res/img/img-logo-miraclecoin.png \
+  qt/miraclecoin/res/img/ic-arrow-right-white.png \
+  qt/miraclecoin/res/img/ic-arrow-left-white.png \
+  qt/miraclecoin/res/img/ic-arrow-left.png \
+  qt/miraclecoin/res/img/ic-copy-liliac.png \
+  qt/miraclecoin/res/img/ic-submenu-staking.png \
+  qt/miraclecoin/res/img/img-nav-logo-miraclecoin.png \
+  qt/miraclecoin/res/img/ic-arrow-right.png \
+  qt/miraclecoin/res/img/ic-copy.png \
+  qt/miraclecoin/res/img/ic-copy-big.png \
+  qt/miraclecoin/res/img/ic-copy-big-white.png \
+  qt/miraclecoin/res/img/ic-submenu-unlock.png \
+  qt/miraclecoin/res/img/img-nav-logo.png \
+  qt/miraclecoin/res/img/ic-arrow-white-left.png \
+  qt/miraclecoin/res/img/ic-exit.png \
+  qt/miraclecoin/res/img/ic-switch-liliac-on.png \
+  qt/miraclecoin/res/img/img-nav-logo.png \
+  qt/miraclecoin/res/img/ic-arrow-white-right.png \
+  qt/miraclecoin/res/img/ic-expand.png \
+  qt/miraclecoin/res/img/ic-switch-off.png \
+  qt/miraclecoin/res/img/img-qr-test-big.png \
+  qt/miraclecoin/res/img/ic-check-active.png \
+  qt/miraclecoin/res/img/ic-folder.png \
+  qt/miraclecoin/res/img/ic-switch-on.png \
+  qt/miraclecoin/res/img/img-qr-test.png \
+  qt/miraclecoin/res/img/ic-check-box.png \
+  qt/miraclecoin/res/img/ic-check-box-dark-active.png \
+  qt/miraclecoin/res/img/ic-check-box-indeterminate.png \
+  qt/miraclecoin/res/img/ic-check-box-liliac-indeterminate.png \
+  qt/miraclecoin/res/img/ic-label-liliac.png \
+  qt/miraclecoin/res/img/ic-transaction-warning.png \
+  qt/miraclecoin/res/img/ic-transaction-mint.png \
+  qt/miraclecoin/res/img/ic-transaction-mint-inactive.png \
+  qt/miraclecoin/res/img/ic-check-cold-staking.png \
+  qt/miraclecoin/res/img/ic-check-cold-staking-off.png \
+  qt/miraclecoin/res/img/ic-check-cold-staking-enabled.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-cs-contract.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-cs-contract-inactive.png \
+  qt/miraclecoin/res/img/img-qr.png \
+  qt/miraclecoin/res/img/ic-check-connect-off.png \
+  qt/miraclecoin/res/img/ic-check-tor-off.png \
+  qt/miraclecoin/res/img/ic-check-tor.png \
+  qt/miraclecoin/res/img/ic-label.png \
+  qt/miraclecoin/res/img/ic-transaction-received.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-received.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-warning.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-mint.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-mint-inactive.png \
+  qt/miraclecoin/res/img/ic-transaction-received-inactive.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-received-inactive.png \
+  qt/miraclecoin/res/img/img-welcome-step1.png \
+  qt/miraclecoin/res/img/ic-check-connect.png \
+  qt/miraclecoin/res/img/ic-menu-hover.png \
+  qt/miraclecoin/res/img/ic-transaction-sent.png \
+  qt/miraclecoin/res/img/ic-transaction-sent-inactive.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-sent.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-sent-inactive.png \
+  qt/miraclecoin/res/img/img-welcome-step2.png \
+  qt/miraclecoin/res/img/ic-check-dark.png \
+  qt/miraclecoin/res/img/ic-mint.png \
+  qt/miraclecoin/res/img/ic-transaction-staked.png \
+  qt/miraclecoin/res/img/ic-transaction-staked-inactive.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-staked.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-staked-inactive.png \
+  qt/miraclecoin/res/img/img-welcome-step3.png \
+  qt/miraclecoin/res/img/ic-check-liliac-on.png \
+  qt/miraclecoin/res/img/ic-nav-address-active.png \
+  qt/miraclecoin/res/img/ic-unlock-staking.png \
+  qt/miraclecoin/res/img/img-welcome-step4.png \
+  qt/miraclecoin/res/img/ic-check-locked-off.png \
+  qt/miraclecoin/res/img/ic-nav-address-hover.png \
+  qt/miraclecoin/res/img/ic-update-liliac.png \
+  qt/miraclecoin/res/img/ic-arrow-drop-down-purple.png \
+  qt/miraclecoin/res/img/ic-arrow-drop-up-purple.png \
+  qt/miraclecoin/res/img/ic-check-liliac-indeterminate.png \
+  qt/miraclecoin/res/img/ic-check-box-liliac-indeterminate.png \
+  qt/miraclecoin/res/img/ic-transaction-stake-delegated.png \
+  qt/miraclecoin/res/img/ic-transaction-stake-delegated-inactive.png \
+  qt/miraclecoin/res/img/ic-transaction-stake-hot.png \
+  qt/miraclecoin/res/img/ic-transaction-stake-hot-inactive.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-stake-hot.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-stake-hot-inactive.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-stake-delegated.png \
+  qt/miraclecoin/res/img/dark/ic-transaction-stake-delegated-inactive.png \
+  qt/miraclecoin/res/img/ic-transaction-cs-contract.png \
+  qt/miraclecoin/res/img/ic-transaction-cs-contract-inactive.png \
+  qt/miraclecoin/res/img/ic-check-box-indeterminate.png \
+  qt/miraclecoin/res/img/ani-loading-dark.gif \
+  qt/miraclecoin/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/miraclecoin/miraclecoingui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/miraclecoin/loadingdialog.cpp \
+  qt/miraclecoin/pwidget.cpp \
+  qt/miraclecoin/focuseddialog.cpp \
+  qt/miraclecoin/guitransactionsutils.cpp \
+  qt/miraclecoin/snackbar.cpp \
+  qt/miraclecoin/navmenuwidget.cpp \
+  qt/miraclecoin/lockunlock.cpp \
+  qt/miraclecoin/receivedialog.cpp \
+  qt/miraclecoin/furabstractlistitemdelegate.cpp \
+  qt/miraclecoin/txviewholder.cpp \
+  qt/miraclecoin/qtutils.cpp \
+  qt/miraclecoin/expandablebutton.cpp \
+  qt/miraclecoin/topbar.cpp \
+  qt/miraclecoin/txrow.cpp \
+  qt/miraclecoin/addressholder.cpp \
+  qt/miraclecoin/addressfilterproxymodel.cpp \
+  qt/miraclecoin/dashboardwidget.cpp \
+  qt/miraclecoin/addresslabelrow.cpp \
+  qt/miraclecoin/contactdropdownrow.cpp \
+  qt/miraclecoin/contactsdropdown.cpp \
+  qt/miraclecoin/optionbutton.cpp \
+  qt/miraclecoin/mninfodialog.cpp \
+  qt/miraclecoin/coldstakingmodel.cpp \
+  qt/miraclecoin/mnmodel.cpp \
+  qt/miraclecoin/masternodewizarddialog.cpp \
+  qt/miraclecoin/mnrow.cpp \
+  qt/miraclecoin/masternodeswidget.cpp \
+  qt/miraclecoin/myaddressrow.cpp \
+  qt/miraclecoin/csrow.cpp \
+  qt/miraclecoin/sendchangeaddressdialog.cpp \
+  qt/miraclecoin/sendconfirmdialog.cpp \
+  qt/miraclecoin/sendcustomfeedialog.cpp \
+  qt/miraclecoin/sendchangeaddressdialog.cpp \
+  qt/miraclecoin/sendmultirow.cpp \
+  qt/miraclecoin/send.cpp \
+  qt/miraclecoin/addnewaddressdialog.cpp \
+  qt/miraclecoin/addnewcontactdialog.cpp \
+  qt/miraclecoin/requestdialog.cpp \
+  qt/miraclecoin/receivewidget.cpp \
+  qt/miraclecoin/tooltipmenu.cpp \
+  qt/miraclecoin/addresseswidget.cpp \
+  qt/miraclecoin/defaultdialog.cpp \
+  qt/miraclecoin/coldstakingwidget.cpp \
+  qt/miraclecoin/settings/settingsbackupwallet.cpp \
+  qt/miraclecoin/settings/settingsexportcsv.cpp \
+  qt/miraclecoin/settings/settingsbittoolwidget.cpp \
+  qt/miraclecoin/settings/settingsconsolewidget.cpp \
+  qt/miraclecoin/settings/settingsdisplayoptionswidget.cpp \
+  qt/miraclecoin/settings/settingsfaqwidget.cpp \
+  qt/miraclecoin/settings/settingsinformationwidget.cpp \
+  qt/miraclecoin/settings/settingsmainoptionswidget.cpp \
+  qt/miraclecoin/settings/settingsmultisenddialog.cpp \
+  qt/miraclecoin/settings/settingsmultisendwidget.cpp \
+  qt/miraclecoin/settings/settingssignmessagewidgets.cpp \
+  qt/miraclecoin/settings/settingswalletoptionswidget.cpp \
+  qt/miraclecoin/settings/settingswalletrepairwidget.cpp \
+  qt/miraclecoin/settings/settingswidget.cpp \
+  qt/miraclecoin/welcomecontentwidget.cpp \
+  qt/miraclecoin/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png
+
+RES_CSS = \
+  qt/miraclecoin/res/css/style_dark.css \
+  qt/miraclecoin/res/css/style_light.css
+
+BITCOIN_RC = qt/res/miraclecoin-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_miraclecoin_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# miraclecoin-qt binary #
+qt_miraclecoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_miraclecoin_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_miraclecoin_qt_SOURCES = qt/miraclecoin.cpp
+if TARGET_DARWIN
+  qt_miraclecoin_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_miraclecoin_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_miraclecoin_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_miraclecoin_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_miraclecoin_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_miraclecoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBSAPLING) $(LIBRUSTZCASH) $(LIBZCASH_LIBS) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_miraclecoin_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_miraclecoin_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/miraclecoinstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/miraclecoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/miraclecoin.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/miraclecoin_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name miraclecoin_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name miraclecoin $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_miraclecoin_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+miraclecoin_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_miraclecoin_qt_OBJECTS) qt/miraclecoin-qt$(EXEEXT) $(LIBBITCOINQT)
+
+miraclecoin_qt : qt/miraclecoin-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

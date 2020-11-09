@@ -1,0 +1,6 @@
+usr/local/bin/miraclecoin-qt usr/bin
+share/pixmaps/miraclecoin32.xpm usr/share/pixmaps
+share/pixmaps/miraclecoin16.xpm usr/share/pixmaps
+share/pixmaps/miraclecoin128.png usr/share/pixmaps
+debian/miraclecoin-qt.desktop usr/share/applications
+debian/miraclecoin-qt.protocol usr/share/kde4/services/

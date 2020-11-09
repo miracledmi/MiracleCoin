@@ -1,0 +1,11 @@
+[Protocol]
+exec=miraclecoin-qt '%u'
+protocol=miraclecoin
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

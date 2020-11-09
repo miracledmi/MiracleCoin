@@ -1,0 +1,81 @@
+policy_module(miraclecoin, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type miraclecoin_t;
+type miraclecoin_exec_t;
+init_daemon_domain(miraclecoin_t, miraclecoin_exec_t)
+
+permissive miraclecoin_t;
+
+type miraclecoin_initrc_exec_t;
+init_script_file(miraclecoin_initrc_exec_t)
+
+type miraclecoin_conf_t;
+files_type(miraclecoin_conf_t)
+
+type miraclecoin_var_lib_t;
+files_type(miraclecoin_var_lib_t)
+
+type miraclecoin_var_run_t;
+files_type(miraclecoin_var_run_t)
+
+type miraclecoin_port_t;
+corenet_port(miraclecoin_port_t)
+
+########################################
+#
+# miraclecoin local policy
+#
+allow miraclecoin_t self:process { fork };
+
+allow miraclecoin_t self:fifo_file rw_fifo_file_perms;
+allow miraclecoin_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(miraclecoin_t, miraclecoin_conf_t, miraclecoin_conf_t)
+manage_files_pattern(miraclecoin_t, miraclecoin_conf_t, miraclecoin_conf_t)
+
+manage_dirs_pattern(miraclecoin_t, miraclecoin_var_lib_t, miraclecoin_var_lib_t)
+manage_files_pattern(miraclecoin_t, miraclecoin_var_lib_t, miraclecoin_var_lib_t)
+files_var_lib_filetrans(miraclecoin_t, miraclecoin_var_lib_t, { dir file })
+
+manage_dirs_pattern(miraclecoin_t, miraclecoin_var_run_t, miraclecoin_var_run_t)
+manage_files_pattern(miraclecoin_t, miraclecoin_var_run_t, miraclecoin_var_run_t)
+
+sysnet_dns_name_resolve(miraclecoin_t)
+corenet_all_recvfrom_unlabeled(miraclecoin_t)
+
+allow miraclecoin_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(miraclecoin_t)
+corenet_tcp_sendrecv_generic_node(miraclecoin_t)
+corenet_tcp_sendrecv_all_ports(miraclecoin_t)
+corenet_tcp_bind_generic_node(miraclecoin_t)
+
+gen_require(`
+    type miraclecoin_port_t;
+')
+allow miraclecoin_t miraclecoin_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type miraclecoin_port_t;
+')
+allow miraclecoin_t miraclecoin_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(miraclecoin_t)
+
+files_read_etc_files(miraclecoin_t)
+
+miscfiles_read_localization(miraclecoin_t)
+
+sysnet_dns_name_resolve(miraclecoin_t)
+
+allow miraclecoin_t miraclecoin_exec_t:file execute_no_trans;
+allow miraclecoin_t self:process setsched;
+corecmd_exec_ls(miraclecoin_t)
+corenet_tcp_connect_http_port(miraclecoin_t)
+dev_read_urand(miraclecoin_t)
+fs_getattr_xattr_fs(miraclecoin_t)
+kernel_read_system_state(miraclecoin_t)
